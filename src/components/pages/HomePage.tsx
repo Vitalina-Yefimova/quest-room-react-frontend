@@ -5,8 +5,9 @@ import GenreNavigation from "../content/GenreNavigation";
 import QuestBlock from "../content/QuestBlock";
 import Footer from "../footer/Footer";
 import useQuestStore from "../../store/useQuestStore";
-import { useParams } from "react-router";
+import { useParams } from "react-router-dom";
 import { useEffect } from "react";
+import { API_BASE_URL } from "../../utils/config";
 
 export default function HomePage(): React.ReactElement {
   const { genre } = useParams<{ genre?: string }>();
@@ -15,7 +16,7 @@ export default function HomePage(): React.ReactElement {
 
   useEffect(() => {
     const fetchQuests = async () => {
-      const res = await fetch("http://localhost:3000/quests");
+      const res = await fetch(`${API_BASE_URL}/quests`);
       const data = await res.json();
       setQuests(data);
     };

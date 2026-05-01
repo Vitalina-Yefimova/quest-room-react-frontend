@@ -11,6 +11,7 @@ import ProfilePage from "./components/pages/ProfilePage";
 import { handleTokenLogin } from "./utils/handleTokenLogin";
 import ResetPasswordPopup from "./components/content/popups/reset-password/ResetPasswordPopup";
 import VerifyNewEmailPage from "./components/pages/VerifyNewEmailPage";
+import { API_BASE_URL } from "./utils/config";
 
 export default function InnerApp() {
   const setQuests = useQuestStore((state) => state.setQuests);
@@ -18,7 +19,7 @@ export default function InnerApp() {
 
   useEffect(() => {
     if (quests.length === 0) {
-      fetch("http://localhost:3000/quests")
+      fetch(`${API_BASE_URL}/quests`)
         .then((response) => {
           if (!response.ok) {
             throw new Error(`Failed to fetch quests: ${response.status}`);

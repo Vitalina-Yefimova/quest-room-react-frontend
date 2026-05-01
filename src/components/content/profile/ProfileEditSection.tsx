@@ -6,6 +6,7 @@ import type { User } from "../../../store/userStore";
 import { getTokenFromCookie } from "../../../utils/getTokenFromCookie";
 import { useForm, useWatch } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { API_BASE_URL } from "../../../utils/config";
 
 const schema = z.object({
   firstName: z.string().min(1, "First name is required"),
@@ -64,7 +65,7 @@ export default function ProfileEditSection() {
     }
 
     try {
-      const res = await fetch(`http://localhost:3000/users/${user.id}`, {
+      const res = await fetch(`${API_BASE_URL}/users/${user.id}`, {
         method: "PATCH",
         headers: {
           Authorization: `Bearer ${token}`,
@@ -111,7 +112,7 @@ export default function ProfileEditSection() {
 
     try {
       const token = getTokenFromCookie();
-      const res = await fetch("http://localhost:3000/auth/change-email", {
+      const res = await fetch(`${API_BASE_URL}/auth/change-email`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

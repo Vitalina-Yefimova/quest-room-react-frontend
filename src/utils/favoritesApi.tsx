@@ -1,5 +1,7 @@
+import { API_BASE_URL } from "./config";
+
 export async function getUserFavorites() {
-  const res = await fetch("http://localhost:3000/favorites", {
+  const res = await fetch(`${API_BASE_URL}/favorites`, {
     credentials: "include",
   });
   if (!res.ok) throw new Error("Failed to fetch favorites");
@@ -7,7 +9,7 @@ export async function getUserFavorites() {
 }
 
 export async function addFavorite(questId: string) {
-  const res = await fetch("http://localhost:3000/favorites", {
+  const res = await fetch(`${API_BASE_URL}/favorites`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     credentials: "include",
@@ -18,7 +20,7 @@ export async function addFavorite(questId: string) {
 }
 
 export async function removeFavorite(questId: string) {
-  const res = await fetch(`http://localhost:3000/favorites/${questId}`, {
+  const res = await fetch(`${API_BASE_URL}/favorites/${questId}`, {
     method: "DELETE",
     credentials: "include",
   });

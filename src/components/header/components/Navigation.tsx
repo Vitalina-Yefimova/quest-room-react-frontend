@@ -3,14 +3,12 @@ import { NavLink, useLocation } from "react-router-dom";
 import CustomCursorWrapper from "../../generics/customCursor/CustomCursorWrapper";
 
 interface NavItems {
-  // interface - это инструмент TS для описания структуры объекта
   path: string;
   label: string;
 }
 
 export default function Navigation(): React.ReactElement {
   const location = useLocation();
-  // NavItems[] указывает, что navItems — это массив объектов, соответствующих интерфейсу NavItems
   const navItems: NavItems[] = [
     { path: "/", label: "QUESTS" },
     { path: "/for-begginners", label: "FOR BEGINNERS" },

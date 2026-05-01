@@ -1,3 +1,5 @@
+import { API_BASE_URL } from "./config";
+
 export interface CreateOrderData {
   questId: string;
   date: string;
@@ -15,7 +17,7 @@ export async function createOrder(data: CreateOrderData) {
   const token = getAccessToken();
   if (!token) throw new Error("No token found");
 
-  const res = await fetch(`http://localhost:3000/orders`, {
+  const res = await fetch(`${API_BASE_URL}/orders`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -37,7 +39,7 @@ export async function getOrders() {
   const token = getAccessToken();
   if (!token) throw new Error("No token found");
 
-  const res = await fetch(`http://localhost:3000/orders`, {
+  const res = await fetch(`${API_BASE_URL}/orders`, {
     headers: {
       Authorization: `Bearer ${token}`,
     },
@@ -56,7 +58,7 @@ export async function updateOrder(
   id: number,
   data: { date: string; participants: number }
 ) {
-  const res = await fetch(`http://localhost:3000/orders/${id}`, {
+  const res = await fetch(`${API_BASE_URL}/orders/${id}`, {
     method: "PATCH",
     headers: { "Content-Type": "application/json" },
     credentials: "include",
@@ -73,7 +75,7 @@ export async function deleteOrder(id: number) {
   const token = getAccessToken();
   if (!token) throw new Error("No token found");
 
-  const res = await fetch(`http://localhost:3000/orders/${id}`, {
+  const res = await fetch(`${API_BASE_URL}/orders/${id}`, {
     method: "DELETE",
     headers: { Authorization: `Bearer ${token}` },
     credentials: "include",

@@ -2,6 +2,7 @@ import BasePopup from "../../../generics/popups/BasePopup";
 import BaseForm from "../../../generics/forms/BaseForm";
 import { z } from "zod";
 import { useState } from "react";
+import { API_BASE_URL } from "../../../../utils/config";
 
 const schema = z.object({
   email: z.string().email("Invalid email"),
@@ -16,7 +17,7 @@ export default function ForgotPasswordPopup({
 
   const handleSubmit = async (data: z.infer<typeof schema>) => {
     const res = await fetch(
-      "http://localhost:3000/auth/send-reset-password-email",
+      `${API_BASE_URL}/auth/send-reset-password-email`,
       {
         method: "POST",
         headers: { "Content-Type": "application/json" },

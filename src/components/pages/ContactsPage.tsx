@@ -1,11 +1,11 @@
-import "../../index.css";
-import Header from "../header/Header";
-import PageTitle from "../generics/title/PageTitle";
-import VectorContactsIcon from "../icons/VectorContactsIcon";
-import ContactInfo from "../content/ContactInfo";
-import GoogleMap from "../content/GoogleMap";
-import Footer from "../footer/Footer";
-import contactsBackground from "../../assets/image/contacts-background.png";
+import contactsBackground from '../../assets/image/contacts-background.png';
+import '../../index.css';
+import ContactInfo from '../content/ContactInfo';
+import GoogleMap from '../content/GoogleMap';
+import Footer from '../footer/Footer';
+import PageTitle from '../generics/title/PageTitle';
+import Header from '../header/Header';
+import VectorContactsIcon from '../icons/VectorContactsIcon';
 
 export default function ContactsPage(): React.ReactElement {
   return (
@@ -16,7 +16,6 @@ export default function ContactsPage(): React.ReactElement {
       ></div>
 
       <div className="relative z-10">
-        {/* z-10 - гарантирует, что контент будет над фоном, а не размоется */}
         <Header className="backdrop-blur-lg" />
         <PageTitle
           className="pt-[138px] pb-[29px] pl-[142px]"

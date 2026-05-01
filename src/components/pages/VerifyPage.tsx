@@ -1,6 +1,7 @@
 import { useState } from "react";
 import VerifyContent from "../generics/verify/VerifyContent";
 import AuthPopup from "./AuthPopup";
+import { API_BASE_URL } from "../../utils/config";
 
 export default function VerifyPage() {
   const [showLoginPopup, setShowLoginPopup] = useState(false);
@@ -8,7 +9,7 @@ export default function VerifyPage() {
   return (
     <div className="min-h-screen bg-black text-white flex items-center justify-center">
       <VerifyContent
-        endpoint="http://localhost:3000/auth/verify"
+        endpoint={`${API_BASE_URL}/auth/verify`}
         onSuccess={() => setTimeout(() => setShowLoginPopup(true), 3000)}
         onClose={() => setShowLoginPopup(true)}
       />

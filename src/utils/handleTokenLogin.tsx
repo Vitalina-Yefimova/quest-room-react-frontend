@@ -1,4 +1,5 @@
 import { useUserStore } from "../store/userStore";
+import { API_BASE_URL } from "./config";
 
 export async function handleTokenLogin(access_token?: string) {
   const { setUser, logout } = useUserStore.getState();
@@ -22,7 +23,7 @@ export async function handleTokenLogin(access_token?: string) {
   const payload = JSON.parse(atob(access_token.split(".")[1]));
   const userId = payload.sub;
 
-  const res = await fetch(`http://localhost:3000/users/${userId}`, {
+  const res = await fetch(`${API_BASE_URL}/users/${userId}`, {
     headers: {
       Authorization: `Bearer ${access_token}`,
       credentials: "include",

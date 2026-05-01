@@ -4,6 +4,7 @@ import BaseForm from "../../../generics/forms/BaseForm";
 import { z } from "zod";
 import { useState } from "react";
 import Button from "../../../generics/button/Button";
+import { API_BASE_URL } from "../../../../utils/config";
 
 const schema = z
   .object({
@@ -22,7 +23,7 @@ export default function ResetPasswordPopup() {
   const navigate = useNavigate();
 
   const handleSubmit = async (data: z.infer<typeof schema>) => {
-    const res = await fetch("http://localhost:3000/auth/reset-password", {
+    const res = await fetch(`${API_BASE_URL}/auth/reset-password`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ token, password: data.password }),

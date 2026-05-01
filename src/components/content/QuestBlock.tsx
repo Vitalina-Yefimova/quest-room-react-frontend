@@ -7,6 +7,7 @@ import CustomCursorWrapper from "../generics/customCursor/CustomCursorWrapper";
 import DividerVector from "../generics/divider/DividerVector";
 import FavoritesToggle from "../generics/favorites/FavoritesToggle";
 import { useUserStore } from "../../store/userStore";
+import { API_BASE_URL } from "../../utils/config";
 
 interface QuestBlockProps {
   quest: Quest;
@@ -28,7 +29,7 @@ const QuestBlock: React.FC<QuestBlockProps> = ({ quest, onFavoriteChange }) => {
               src={
                 quest.image?.startsWith("http")
                   ? quest.image
-                  : `http://localhost:3000${quest.image ?? ""}`
+                  : `${API_BASE_URL}${quest.image ?? ""}`
               }
               alt={quest.title}
               className="w-full object-cover select-none"

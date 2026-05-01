@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { handleTokenLogin } from "../../../utils/handleTokenLogin";
 import { useState } from "react";
 import ForgotPasswordPopup from "../popups/reset-password/ForgotPasswordPopup";
+import { API_BASE_URL } from "../../../utils/config";
 
 const loginSchema = z.object({
   email: z.string().email("Invalid email"),
@@ -50,7 +51,7 @@ export default function EmailAuthForm({
     data: z.infer<typeof loginSchema> | z.infer<typeof registerSchema>
   ) => {
     if (authType === "login") {
-      const response = await fetch("http://localhost:3000/auth/sign-in", {
+      const response = await fetch(`${API_BASE_URL}/auth/sign-in`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data),
@@ -76,14 +77,11 @@ export default function EmailAuthForm({
         frontendUrl: `${window.location.origin}/verify`,
       };
 
-      const registerResponse = await fetch(
-        "http://localhost:3000/auth/sign-up",
-        {
+      const registerResponse = await fetch(`${API_BASE_URL}/auth/sign-up`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(payload),
-        }
-      );
+        });
 
       if (!registerResponse.ok) {
         const error = await registerResponse.json();

@@ -1,9 +1,9 @@
-import { Map, Marker } from "@vis.gl/react-google-maps";
+import { Map, Marker } from '@vis.gl/react-google-maps';
 
 const GoogleMap: React.FC = () => {
   const center = {
-    lat: 51.045190861031465, // широта
-    lng: -114.05957001271959, // долгота
+    lat: 51.045190861031465,
+    lng: -114.05957001271959,
   };
 
   return (
@@ -12,7 +12,7 @@ const GoogleMap: React.FC = () => {
         <Marker
           position={center}
           icon={{
-            url: "/location-map-icon.svg",
+            url: '/location-map-icon.svg',
             scaledSize: new google.maps.Size(47.5, 61),
           }}
         />

@@ -3,6 +3,7 @@ import BaseForm from "../../generics/forms/BaseForm";
 import { z } from "zod";
 import { useUserStore } from "../../../store/userStore";
 import { getTokenFromCookie } from "../../../utils/getTokenFromCookie";
+import { API_BASE_URL } from "../../../utils/config";
 
 const schema = z
   .object({
@@ -25,7 +26,7 @@ export default function ChangePasswordSection() {
     if (!token) throw new Error("No token provided");
 
     try {
-      const res = await fetch(`http://localhost:3000/users/${user.id}`, {
+      const res = await fetch(`${API_BASE_URL}/users/${user.id}`, {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json",

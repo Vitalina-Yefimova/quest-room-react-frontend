@@ -2,6 +2,7 @@ import { z } from "zod";
 import { useState } from "react";
 import BaseForm from "../../generics/forms/BaseForm";
 import { handleTokenLogin } from "../../../utils/handleTokenLogin";
+import { API_BASE_URL } from "../../../utils/config";
 
 const phoneSchema = z.object({
   phone: z
@@ -26,7 +27,7 @@ export default function PhoneAuthForm({
   const [phone, setPhone] = useState("");
 
   const handleSendOtp = async (data: { phone: string }) => {
-    const response = await fetch("http://localhost:3000/auth/send-otp", {
+    const response = await fetch(`${API_BASE_URL}/auth/send-otp`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -44,7 +45,7 @@ export default function PhoneAuthForm({
   };
 
   const handleVerifyCode = async (data: { code: string }) => {
-    const response = await fetch("http://localhost:3000/auth/verify-otp", {
+    const response = await fetch(`${API_BASE_URL}/auth/verify-otp`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

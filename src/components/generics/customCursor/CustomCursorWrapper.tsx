@@ -2,7 +2,7 @@ import { useState, useRef, ReactNode } from "react";
 import CursorHandIcon from "../../icons/CursorHandIcon";
 
 interface CustomCursorWrapperProps {
-  children: ReactNode; // Оборачивает любой контент в div и передаёт его в children для отображения контента внутри обёртки с кастомным курсором
+  children: ReactNode;
 }
 
 const CustomCursorWrapper: React.FC<CustomCursorWrapperProps> = ({
@@ -42,7 +42,6 @@ const CustomCursorWrapper: React.FC<CustomCursorWrapperProps> = ({
         </div>
       )}
       {children}
-      {/* // Оборачивает контент в div и передаёт его в children для отображения контента внутри обёртки с кастомным курсором  */}
     </div>
   );
 };
