@@ -1,53 +1,80 @@
-# React + TypeScript + Vite
+# Quest Room — React frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Single-page frontend for escape-room quests: browse by genre, book sessions, authenticate (phone / email), manage profile, favorites and orders — plus contacts with Google Maps.
 
-Currently, two official plugins are available:
+**Live demo:** *not deployed yet — run locally (see below).*
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+[![React](https://img.shields.io/badge/React-19-61DAFB?logo=react&logoColor=white)](https://react.dev/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5-3178C6?logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
+[![Vite](https://img.shields.io/badge/Vite-6-646CFF?logo=vite&logoColor=white)](https://vitejs.dev/)
+[![Tailwind CSS](https://img.shields.io/badge/Tailwind-4-38B2AC?logo=tailwind-css&logoColor=white)](https://tailwindcss.com/)
 
-## Expanding the ESLint configuration
+## Features
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+- Quest catalog + genre filtering (`/genre/:genre`)
+- Quest page + booking (`/detailed-quest/:id`)
+- Auth flows, reset password, email verification
+- Profile: favorites, orders, edits, credentials
+- Contacts + map (`@vis.gl/react-google-maps`)
 
-- Configure the top-level `parserOptions` property like this:
+## Stack
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+React 19, TypeScript 5, Vite 6, Tailwind CSS 4, React Router 7, Zustand, React Hook Form + Zod, Axios / `fetch`, Lucide, react-datepicker.
+
+## Backend
+
+Requests are coded against **`http://localhost:3000`** (quests `GET /quests`, `/orders`, auth, favorites). See `src/utils/` and auth forms.
+
+**Public demo caveat:** deploying only this repo does not yield a fully working app unless the backend is reachable from the browser (HTTPS + CORS as needed). Clone the repo and run backend + frontend locally for development.
+
+## Deploy (static SPA)
+
+Nothing “magic” ships with the repo besides **SPA fallback** so client routes (`/profile`, `/detailed-quest/:id`) do not 404 on refresh:
+
+| Host | Notes |
+|------|--------|
+| **Vercel** | `vercel.json` wires all paths to `index.html`. Root: **`dist`**. Build command: `npm run build`. Set env **`VITE_GOOGLE_MAPS_API_KEY`** for production. |
+| **Netlify / Cloudflare Pages** | `public/_redirects` is copied into **`dist`** on build (same SPA rule). Publish directory: **`dist`**, build: `npm run build`. Same env variable in dashboard. |
+
+## Run locally
+
+**Node.js 20+** recommended.
+
+```bash
+npm install
+cp .env.example .env          # Windows: copy .env.example .env
 ```
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+Set `VITE_GOOGLE_MAPS_API_KEY` in `.env` (Google Maps JavaScript API).
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
-
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
+```bash
+npm run dev       # → http://localhost:5173
+npm run build
+npm run preview
+npm run lint
 ```
 
+## Repo layout
+
+```
+src/components/   # pages, layout, forms, popups
+src/store/        # Zustand
+src/utils/        # API, cookies / tokens
+public/
+```
+
+### Optional tooling
+
+SVG → React (SVGR CLI is in devDependencies):
+
+```bash
 npx @svgr/cli src/assets/icons/vector-contacts-icon.svg --out-dir src/components/icons
-npm install --save google-map-react --legacy-peer-deps
+```
+
+---
+
+**On GitHub:** you can fill in the repo **About** description (one line) and **topics** in the repo settings — separate from this file.
+
+## License
+
+Private (`private` in `package.json`).
